@@ -145,8 +145,6 @@ as intended
   then you shouldn't run into any issues. However we all know input can be
   tricky so `tedent` has a few edge-cases built-in as well as input requirements
 
-<br>
-
 #### edge-cases and input requirements
 
 - if the first argument is anything but `undefined` or `typeof 'string'` then an error will be thrown
