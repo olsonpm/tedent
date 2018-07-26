@@ -1,0 +1,38 @@
+{
+  "name": "tedent",
+  "version": "0.1.0",
+  "description": "normalizes template string indentation like you'd expect",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/olsonpm./tedent.git"
+  },
+  "author": {
+    "name": "Phil Olson",
+    "email": "philipolson@pm.me"
+  },
+  "license": "SEE LICENSE IN license.txt",
+  "bugs": {
+    "url": "https://github.com/olsonpm/tedent/issues"
+  },
+  "homepage": "https://github.com/olsonpm/tedent",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "eslint": "^3.19.0",
+    "eslint-config-personal": "github:olsonpm/eslint-config-personal",
+    "mocha": "^5.2.0",
+    "prettier": "^1.13.7"
+  },
+  "dependencies": {},
+  "eslintConfig": {
+    "extends": "personal",
+    "env": {
+      "mocha": true
+    }
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "semi": false
+  }
+}
