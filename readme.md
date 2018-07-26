@@ -2,6 +2,8 @@
 
 Keep your multi-line templated strings lookin' good :sunglasses:
 
+<br>
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
@@ -18,10 +20,14 @@ Keep your multi-line templated strings lookin' good :sunglasses:
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
+<br>
+
 ### What is it?
 
 - A function similar to [dedent](https://github.com/dmnd/dedent) just with
   different semantics
+
+<br>
 
 ### What does the name stand for?
 
@@ -29,6 +35,8 @@ Keep your multi-line templated strings lookin' good :sunglasses:
 - in`dent`ation
 
 names are hard
+
+<br>
 
 ### Why create it?
 
@@ -66,6 +74,8 @@ New York boroughs
 */
 ```
 
+<br>
+
 ### Simple Usage
 
 ```js
@@ -78,6 +88,8 @@ console.log(
   `)
 )
 ```
+
+<br>
 
 ### How the indentation works
 
@@ -115,6 +127,8 @@ info
 `tedent` will handle both the same obviously, but the first one reads
 as intended
 
+<br>
+
 ### Important Usage Notes
 
 - First of all, this library doesn't handle tabs. I will accept a PR
@@ -131,6 +145,8 @@ as intended
   then you shouldn't run into any issues. However we all know input can be
   tricky so `tedent` has a few edge-cases built-in as well as input requirements
 
+<br>
+
 #### edge-cases and input requirements
 
 - if the first argument is anything but `undefined` or `typeof 'string'` then an error will be thrown
@@ -146,6 +162,8 @@ as intended
 
 I didn't feel it necessary to explain the reasons for my choices in handling
 edge-cases, but if you have questions please ask via github issues.
+
+<br>
 
 ### Test
 
