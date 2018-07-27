@@ -87,6 +87,10 @@ console.log(
       as you expect
   `)
 )
+
+// writes:
+// This will be indented
+//   as you expect
 ```
 
 <br>
@@ -94,8 +98,8 @@ console.log(
 ### How the indentation works
 
 The indentation scheme is simple. `tedent` takes the second line in the string
-and sets the number of leading spaces as the 'anchor'. All subsequent lines are
-then indented according to the anchor using the rules:
+and sets the number of leading spaces as the 'anchor'. All lines are then
+indented according to the anchor using the rules:
 
 - if the number of leading spaces is greater or equal to the anchor, then
   indent `numLeadingSpaces - anchor`
