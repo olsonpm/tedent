@@ -69,6 +69,9 @@ function isOnlyWhitespace(aString) {
 // - removes any tailing lines which only contain whitespace
 // - last line with a non-whitespace character has tailing whitespace removed
 //
+// TODO: after new 'fes' is written, utilize a new method 'discardLastWhile'.
+//   This for loop below is bugly
+//
 function trimLastLines(arrayOfStrings) {
   let i = arrayOfStrings.length - 1
 
@@ -82,6 +85,7 @@ function trimLastLines(arrayOfStrings) {
         if (j !== ' ') break
       }
       arrayOfStrings[i] = currentString.slice(0, j + 1)
+      break
     }
   }
 
