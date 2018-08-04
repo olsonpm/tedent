@@ -1,4 +1,4 @@
-//------//
+getNumberOfLeadingSpaces //------//
 // Init //
 //------//
 
@@ -41,7 +41,7 @@ const tedent = aString => {
 
   // valid input woo woo !
 
-  const anchor = getAnchor(secondLine)
+  const anchor = getNumberOfLeadingSpaces(secondLine)
 
   // allLines is being mutated for performance
   return passThrough(allLines, [
@@ -109,44 +109,58 @@ function indentWith(anchor) {
   return allLines => {
     if (anchor === 0) return allLines
 
+    let indent = 0
+
     for (let i = 0; i < allLines.length; i += 1) {
-      allLines[i] = adjustWhitespace(allLines[i], anchor)
+      const oldLine = allLines[i]
+      allLines[i] = adjustWhitespace(allLines[i], anchor, indent)
+      indent = passThrough(oldLine, [
+        getNumberOfLeadingSpaces,
+        updateIndent(indent),
+      ])
     }
 
     return allLines
   }
+
+  // helper function scoped to 'indentWith'
+
+  function updateIndent(previousIndent) {
+    return leadingSpaces => {
+      const maybeNewIndent = leadingSpaces - anchor
+
+      if (maybeNewIndent === 0) return 0
+      else if (maybeNewIndent > 0) return maybeNewIndent
+      else return previousIndent
+    }
+  }
 }
 
-function adjustWhitespace(line, anchor) {
+function adjustWhitespace(line, anchor, indent) {
+  const numberOfLeadingSpaces = getNumberOfLeadingSpaces(line),
+    lineWithoutLeadingSpace = discardFirst(numberOfLeadingSpaces)(line)
+
+  if (numberOfLeadingSpaces - anchor === 0) return lineWithoutLeadingSpace
+
+  let newIndent = numberOfLeadingSpaces + indent
+
+  if (numberOfLeadingSpaces >= anchor) {
+    newIndent -= anchor
+  }
+
+  return createStringOfSpaces(newIndent) + lineWithoutLeadingSpace
+}
+
+function discardFirst(n) {
+  return line => line.slice(n)
+}
+
+function getNumberOfLeadingSpaces(line) {
   let i = 0
   for (; i < line.length; i += 1) {
     if (line[i] !== ' ') break
   }
-
-  if (i < anchor) return line
-
-  const leadingSpaces = createStringOfSpaces(i - anchor),
-    restOfLine = line.slice(i)
-
-  return leadingSpaces + restOfLine
-}
-
-function getAnchor(secondLine) {
-  return keepFirstWhile(strictlyEquals(' '))(secondLine).length
-}
-
-function strictlyEquals(left) {
-  return right => left === right
-}
-
-function keepFirstWhile(predicate) {
-  return anArrayLike => {
-    let i = 0
-    for (; i < anArrayLike.length; i += 1) {
-      if (!predicate(anArrayLike[i], i, anArrayLike)) break
-    }
-    return anArrayLike.slice(0, i)
-  }
+  return i
 }
 
 function all(predicate) {

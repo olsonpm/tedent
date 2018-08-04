@@ -97,39 +97,39 @@ console.log(
 
 ### How the indentation works
 
-The indentation scheme is simple. `tedent` takes the second line in the string
-and sets the number of leading spaces as the 'anchor'. All lines are then
-indented according to the anchor using the rules:
-
-- if the number of leading spaces is greater or equal to the anchor, then
-  indent `numLeadingSpaces - anchor`
-- if it's less, then indent `numLeadingSpaces`
-
-Keep in mind the above rules are catered to multiline variables. The result will
-look weird if you manually expand the variables
-
-i.e. this is expected
+The indentation logic is fairly convoluted in order to make the following work
 
 ```js
-const moreInfo = 'more\ninfo'
-tedent(`
-    Some string
-    ${moreInfo}
-`)
+const jstring = anObject => JSON.stringify(anObject, null, 2)
+
+console.log(
+  tedent(`
+    header
+
+      object 1: ${jstring(object1)}
+
+      object 2: ${jstring(object2)}
+  `)
+)
+
+//---------
+// outputs
+//---------
+// header
+//
+//   object 1: {
+//     ...properly indented object1 contents...
+//   }
+//
+//   object 2: {
+//     ...properly indented object2 contents...
+//   }
+//
 ```
 
-not this
-
-```js
-tedent(`
-    Some string
-    more
-info
-`)
-```
-
-`tedent` will handle both the same obviously, but the first one reads
-as intended
+Because the indentation logic is both young and convoluted, please refer to
+[the code](index.js) and [tests](test.js) for details. The library is not that
+big and if you have any questions please create a github issue.
 
 <br>
 

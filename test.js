@@ -59,6 +59,14 @@ suite('simple', () => {
       first\n  second
     `).should.equal('first\n  second')
   })
+
+  test('indent affects subsequent lines', () => {
+    // indent is relative to prior line
+    m(`
+      first
+        second\n  third\n    fourth
+    `).should.equal('first\n  second\n    third\n      fourth')
+  })
 })
 
 suite('complex', () => {
@@ -69,7 +77,7 @@ suite('complex', () => {
   test('catch all', () => {
     m(`
       first
-        second\n    third
+        second\n  third
       fourth
 
     `).should.equal('first\n  second\n    third\nfourth')
