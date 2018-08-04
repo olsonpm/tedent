@@ -67,6 +67,15 @@ suite('simple', () => {
         second\n  third\n    fourth
     `).should.equal('first\n  second\n    third\n      fourth')
   })
+
+  test('indent only lines with less space than anchor', () => {
+    // indent is relative to prior line
+    m(`
+      first
+        second
+        third\n  fourth
+    `).should.equal('first\n  second\n  third\n    fourth')
+  })
 })
 
 suite('complex', () => {
@@ -77,10 +86,11 @@ suite('complex', () => {
   test('catch all', () => {
     m(`
       first
-        second\n  third
-      fourth
+        second
+        third\n  fourth
+      fifth
 
-    `).should.equal('first\n  second\n    third\nfourth')
+    `).should.equal('first\n  second\n  third\n    fourth\nfifth')
   })
 })
 

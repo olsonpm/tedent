@@ -109,14 +109,15 @@ function indentWith(anchor) {
   return allLines => {
     if (anchor === 0) return allLines
 
-    let indent = 0
+    let runningIndent = 0
 
     for (let i = 0; i < allLines.length; i += 1) {
       const oldLine = allLines[i]
-      allLines[i] = adjustWhitespace(allLines[i], anchor, indent)
-      indent = passThrough(oldLine, [
+
+      allLines[i] = adjustWhitespace(allLines[i], anchor, runningIndent)
+      runningIndent = passThrough(oldLine, [
         getNumberOfLeadingSpaces,
-        updateIndent(indent),
+        updateIndent(runningIndent),
       ])
     }
 
@@ -125,30 +126,29 @@ function indentWith(anchor) {
 
   // helper function scoped to 'indentWith'
 
-  function updateIndent(previousIndent) {
+  function updateIndent(runningIndent) {
     return leadingSpaces => {
       const maybeNewIndent = leadingSpaces - anchor
 
       if (maybeNewIndent === 0) return 0
       else if (maybeNewIndent > 0) return maybeNewIndent
-      else return previousIndent
+      else return runningIndent
     }
   }
 }
 
-function adjustWhitespace(line, anchor, indent) {
+function adjustWhitespace(line, anchor, runningIndent) {
   const numberOfLeadingSpaces = getNumberOfLeadingSpaces(line),
-    lineWithoutLeadingSpace = discardFirst(numberOfLeadingSpaces)(line)
+    lineWithoutLeadingSpace = discardFirst(numberOfLeadingSpaces)(line),
+    currentIndent = numberOfLeadingSpaces - anchor
 
-  if (numberOfLeadingSpaces - anchor === 0) return lineWithoutLeadingSpace
+  let newLeadingSpace = 0
 
-  let newIndent = numberOfLeadingSpaces + indent
+  if (currentIndent > 0) newLeadingSpace = currentIndent
+  else if (currentIndent < 0)
+    newLeadingSpace = numberOfLeadingSpaces + runningIndent
 
-  if (numberOfLeadingSpaces >= anchor) {
-    newIndent -= anchor
-  }
-
-  return createStringOfSpaces(newIndent) + lineWithoutLeadingSpace
+  return createStringOfSpaces(newLeadingSpace) + lineWithoutLeadingSpace
 }
 
 function discardFirst(n) {
