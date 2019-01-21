@@ -1,4 +1,4 @@
-getNumberOfLeadingSpaces //------//
+//------//
 // Init //
 //------//
 
@@ -81,8 +81,8 @@ function trimLastLines(arrayOfStrings) {
     } else {
       const currentString = arrayOfStrings[i]
       let j = currentString.length - 1
-      for (; j >= 0; j += 1) {
-        if (j !== ' ') break
+      for (; j >= 0; j -= 1) {
+        if (currentString[j] !== ' ') break
       }
       arrayOfStrings[i] = currentString.slice(0, j + 1)
       break

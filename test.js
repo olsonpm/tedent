@@ -40,12 +40,6 @@ suite('simple', () => {
     `).should.equal('first\n  second')
   })
 
-  test('second line indented behind anchor', () => {
-    m(`
-      first\n  second
-    `).should.equal('first\n  second')
-  })
-
   test('trailing empty line removed', () => {
     m(`
       first\n  second
@@ -54,9 +48,8 @@ suite('simple', () => {
   })
 
   test('trailing space in last line removed', () => {
-    // there are two spaces after 'second'
     m(`
-      first\n  second
+      first\n  second${' '}${' '}
     `).should.equal('first\n  second')
   })
 
@@ -68,8 +61,7 @@ suite('simple', () => {
     `).should.equal('first\n  second\n    third\n      fourth')
   })
 
-  test('indent only lines with less space than anchor', () => {
-    // indent is relative to prior line
+  test('only indent subsequent lines with less leading space than the anchor', () => {
     m(`
       first
         second
