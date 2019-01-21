@@ -1,6 +1,6 @@
 {
   "name": "tedent",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "normalizes template string indentation like you'd expect",
   "main": "index.js",
   "repository": {
