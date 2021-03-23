@@ -1,5 +1,5 @@
 {
-  "name": "tedent",
+  "name": "@olsonpm/tedent",
   "version": "0.2.2",
   "description": "normalizes template string indentation like you'd expect",
   "main": "index.js",
@@ -7,10 +7,7 @@
     "type": "git",
     "url": "git://github.com/olsonpm./tedent.git"
   },
-  "author": {
-    "name": "Phil Olson",
-    "email": "philipolson@pm.me"
-  },
+  "author": "Phil Olson <philipolson@pm.me>",
   "license": "SEE LICENSE IN license.txt",
   "bugs": {
     "url": "https://github.com/olsonpm/tedent/issues"
@@ -34,5 +31,8 @@
     "singleQuote": true,
     "trailingComma": "es5",
     "semi": false
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   }
 }
